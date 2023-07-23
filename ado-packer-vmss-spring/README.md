@@ -100,8 +100,8 @@ Azure DevOps를 사용한 Spring Application to Azure VMSS CI/CD 데모
         --subnet $1 \
         --image "springboot-application-$2" \
         --vm-sku "Standard_A2_v2" \
-        --admin-username  "az" \
-        --admin-password "dkagh1.dkagh1."  \
+        --admin-username  "<USERNAME>" \
+        --admin-password "<PASSWORD>"  \
         --backend-pool-name $3 \
         --upgrade-policy-mode "Automatic" \
         --instance-count 2
