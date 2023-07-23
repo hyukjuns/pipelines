@@ -1,4 +1,4 @@
-# spring-vmss-cicd-demo
+# ado-packer-vmss-spring
 Azure DevOps를 사용한 Spring Application to Azure VMSS CI/CD 데모
 ![cicd](img/spring-vmss-cicd.png)
 
