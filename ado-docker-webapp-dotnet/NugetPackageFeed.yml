@@ -1,0 +1,44 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- None
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  LogicProjectPath: './AnimalAdoption.Common.Logic/AnimalAdoption.Common.Logic.csproj'
+  Version: '1.0.0'
+  PackageName: 'AnimalAdoption.Common.Logic'
+
+steps:
+  - task: NuGetToolInstaller@1
+    inputs:
+      versionSpec:
+
+  - task: NuGetCommand@2
+    displayName: Nuget restore
+    inputs:
+      command: 'restore'
+      restoreSolution: '$(LogicProjectPath)'
+      feedsToUse: 'select'
+      vstsFeed: '60c6bfff-09a1-4a8b-ae5d-6f2f9f254488/2a8a380b-a189-45bc-bcbf-3256deee62b8'
+    
+  - task: NuGetCommand@2
+    displayName: Nuget pack
+    inputs:
+      command: 'custom'
+      arguments: 'pack -Build $(LogicProjectPath) -OutputDirectory $(Build.ArtifactStagingDirectory) -Version $(Version)'
+
+  - task: NuGetCommand@2
+    displayName: Nuget push
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/$(PackageName).$(Version).nupkg'
+      nuGetFeedType: 'internal'
+      publishVstsFeed: '60c6bfff-09a1-4a8b-ae5d-6f2f9f254488/2a8a380b-a189-45bc-bcbf-3256deee62b8'
+      allowPackageConflicts: true
+  

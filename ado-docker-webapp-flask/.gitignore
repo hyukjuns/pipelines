@@ -1,0 +1,4 @@
+### Exclusive Files
+*.csv
+*.venv
+__pycache__

@@ -1,0 +1,49 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/main/resources/static
+    exclude:
+      - README.md
+
+variables:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build
+  jobs:
+    - job:
+      pool:
+        vmImage: $(vmImage)
+      steps:
+      - task: Maven@3
+        displayName: Maven Package
+        inputs:
+          mavenPomFile: 'pom.xml'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.8'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
+      - task: Bash@3
+        displayName: Rename ROOT.war
+        inputs:
+          targetType: 'inline'
+          script: 'cp *.war ROOT.war'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/target'
+      - task: PublishBuildArtifacts@1
+        displayName: Publish Artifact
+        inputs:
+          PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'

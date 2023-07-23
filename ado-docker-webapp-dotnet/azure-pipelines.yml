@@ -1,0 +1,59 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - none
+  paths:
+    include:
+      - AnimalAdoption.Web.Portal
+    exclude:
+      - README.md
+
+variables:
+  buildConfiguration: Release
+  dockerRepository: 'hyukjun/release-myaspnet'
+
+stages:
+  - stage: Build
+    jobs:
+      - job: buildapp
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: UseDotNet@2
+            displayName: Install dotnet sdk and runtime
+            inputs:
+              packageType: 'sdk'
+              version: '5.0.x'
+          - task: DotNetCoreCLI@2
+            displayName: Restore dotnet project
+            inputs:
+              command: 'restore'
+              projects: '$(System.DefaultWorkingDirectory)/AnimalAdoption.Web.Portal/AnimalAdoption.Web.Portal.csproj'
+              feedsToUse: 'select'
+              vstsFeed: 'a6867725-a532-4626-b694-35a04eee7657/5ec96b74-2d86-46d7-b2b6-3432fc27ff47'
+          - task: DotNetCoreCLI@2
+            displayName: Publish dotnet project
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              arguments: '-c $(buildConfiguration) -o ./app --no-restore'
+              zipAfterPublish: false
+              modifyOutputPath: false
+              workingDirectory: '$(System.DefaultWorkingDirectory)/AnimalAdoption.Web.Portal'
+          - task: DockerInstaller@0
+            displayName: Install docker engine
+            inputs:
+              dockerVersion: '17.09.0-ce'
+          - task: Docker@2
+            displayName: Docker Build and Push
+            inputs:
+              containerRegistry: 'dockerhub'
+              repository: '$(dockerRepository)'
+              command: 'buildAndPush'
+              Dockerfile: '$(System.DefaultWorkingDirectory)/AnimalAdoption.Web.Portal/Dockerfile'
+              tags: '$(Build.BuildNumber)'

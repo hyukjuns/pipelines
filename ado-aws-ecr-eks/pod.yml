@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  namespace: demo
+  labels:
+    name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: 259732909616.dkr.ecr.ap-northeast-2.amazonaws.com/demo-python-app:v2.6
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 5000
