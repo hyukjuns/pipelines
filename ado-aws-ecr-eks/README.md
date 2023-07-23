@@ -1,7 +1,10 @@
 # AWS ECR,EKS를 사용하는 Azure DevOps CI/CD 데모
-![badge](https://vsrm.dev.azure.com/hyukjun/_apis/public/Release/badge/eed91596-64f6-438c-a566-14f3570c9c54/1/3)
+
 ## 요약
 Azure DevOps를 사용해 Docker Image를 빌드하고 ECR에 Push, 이후 EKS에  빌드된 이미지를 배포하는 CI/CD 데모
+
+![eks-1.png](img/eks-1.png)
+
 ## 데모 환경
 - Application
     - Job Info Scrapping Web Application v2

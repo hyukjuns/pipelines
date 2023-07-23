@@ -1,6 +1,4 @@
 # ASP.NET Web Application CI/CD Demo
-[![Build Status](https://dev.azure.com/hyukjun/dotnet-demo/_apis/build/status/hyukjuns.dotnet-webapp-cicd-demo?branchName=main)](https://dev.azure.com/hyukjun/dotnet-demo/_build/latest?definitionId=31&branchName=main)
-![deploy-status-badge](https://vsrm.dev.azure.com/hyukjun/_apis/public/Release/badge/a6867725-a532-4626-b694-35a04eee7657/2/6)
 
 ## 요약
 Azure DevOps를 사용해 ASP.NET Web Application을 Docker Image로 빌드 하고 ACR에 Push(혹은 Dockerhub도 가능합니다), 이후 Azure Webapp for Container(Linux)에 배포하는 CI/CD 데모

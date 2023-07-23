@@ -1,6 +1,5 @@
 # Spring Web Application CI/CD Demo
-[![Build Status](https://dev.azure.com/hyukjun/spring-demo/_apis/build/status/hyukjuns.spring-webapp-cicd-demo?branchName=main)](https://dev.azure.com/hyukjun/spring-demo/_build/latest?definitionId=30&branchName=main)
-![badge](https://vsrm.dev.azure.com/hyukjun/_apis/public/Release/badge/12662097-5691-4bfb-b701-d4340345b1fc/7/13)
+
 ## 요약
 Azure DevOps를 사용해 Spring Framework Web application을 빌드하고, Azure App Service - Webapp에 배포하는 CI/CD 데모
 * Source repository는 Azure Repos에 Github repository를 import하여 사용할 수 있습니다.

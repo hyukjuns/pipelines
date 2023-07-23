@@ -1,5 +1,5 @@
 # Develop Flask Web Application and CI in Azure DevOps
-[![Build Status](https://dev.azure.com/hyukjun/flask-demo/_apis/build/status/hyukjuns.flask-webapp-cicd-demo?branchName=master)](https://dev.azure.com/hyukjun/flask-demo/_build/latest?definitionId=32&branchName=master)
+
 ## Application Info
 ## Job Info Scrapping Web Application
 ### Language & Framework 
